@@ -1,10 +1,10 @@
 package main
 
 import (
-	"api/pkg/tasks"
 	"fmt"
 	"os"
 	"time"
+	"todo/pkg/tasks"
 )
 
 func main() {
