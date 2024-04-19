@@ -1,8 +1,10 @@
 package main
 
 import (
+	"bufio"
 	"fmt"
 	"os"
+	"strings"
 	"time"
 	"todo/pkg/tasks"
 )
@@ -38,20 +40,27 @@ func main() {
 	switch opcao {
 	case 1:
 		var title, description string
+		reader := bufio.NewReader(os.Stdin)
 		fmt.Println("Digite o título da tarefa:")
-		fmt.Scanln(&title)
+		title, _ = reader.ReadString('\n')
+		title = strings.TrimSpace(title)
 		fmt.Println("Digite a descrição da tarefa:")
-		fmt.Scanln(&description)
+		description, _ = reader.ReadString('\n')
+		description = strings.TrimSpace(description)
 		taskList.AdicionarTask(title, description)
 		fmt.Println("Tarefa adicionada com sucesso!")
 	case 2:
 		var title, newTitle, newDescription string
+		reader := bufio.NewReader(os.Stdin)
 		fmt.Println("Digite o título da tarefa que deseja atualizar:")
-		fmt.Scanln(&title)
+		title, _ = reader.ReadString('\n')
+		title = strings.TrimSpace(title)
 		fmt.Println("Digite o novo título da tarefa:")
-		fmt.Scanln(&newTitle)
+		newTitle, _ = reader.ReadString('\n')
+		newTitle = strings.TrimSpace(newTitle)
 		fmt.Println("Digite a nova descrição da tarefa:")
-		fmt.Scanln(&newDescription)
+		newDescription, _ = reader.ReadString('\n')
+		newDescription = strings.TrimSpace(newDescription)
 		err := taskList.AtualizarTask(title, newTitle, newDescription)
 		if err != nil {
 			fmt.Println("Erro:", err)
@@ -60,8 +69,10 @@ func main() {
 		}
 	case 3:
 		var title string
+		reader := bufio.NewReader(os.Stdin)
 		fmt.Println("Digite o título da tarefa que deseja excluir:")
-		fmt.Scanln(&title)
+		title, _ = reader.ReadString('\n')
+		title = strings.TrimSpace(title)
 		err := taskList.ExcluirTask(title)
 		if err != nil {
 			fmt.Println("Erro:", err)
