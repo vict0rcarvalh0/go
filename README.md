@@ -54,3 +54,69 @@ Usado para definir as dependências do projeto, bem como o próprio módulo do p
     - Verifica quais pacotes seu programa realmente depende e adiciona ou remove dependências em seu arquivo go.mod conforme necessário.
 - `go mod diretorio_exemplo`
     - Copia todas as dependências do seu módulo para um diretório localizado no seu projeto.
+
+## Syntax
+#### Packages
+The entire Go program is made up of packages, at the beginning of each file it is necessary to declare the `package file_name` and import the modules as follows:
+``` go
+import (
+    "fmt"
+    "math/rand"
+)
+```
+
+#### Types
+- bool
+- string
+- int  int8  int16  int32  int64
+- uint uint8 uint16 uint32 uint64 uintptr
+- byte // alias for uint8
+- rune // alias for int32, represents a Unicode code point
+- float32 float64
+- complex64 complex128
+
+#### Type Conversion
+There are two ways to convert types:
+1. **Explicit**
+```go
+var i int = 10
+var f float64 = float64(i)
+var u uint = uint(f)
+```
+2. **Implicit**
+```go
+i := 42
+f := float64(i)
+u := uint(f)
+```
+
+#### Functions
+```go
+func MyFunction(var1 type, var2 type) return_type {
+    return x + y
+}
+```
+
+```go
+func MyFunction(var1 type, var2 type) (return_type, return_type) {
+    return x + y
+}
+```
+
+#### Variables
+The var statement declares a list of variables; as in function argument lists, the type is last.
+
+```go
+var a, b, c bool
+
+func main() {
+	var i int
+	fmt.Println(i, a, b, c)
+}
+```
+
+#### Constants
+Are declared like variables, but with the const keyword.
+```go
+const MyConst
+``````
