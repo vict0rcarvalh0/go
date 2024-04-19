@@ -119,4 +119,60 @@ func main() {
 Are declared like variables, but with the const keyword.
 ```go
 const MyConst
-``````
+```
+
+#### For
+```go
+sum := 0
+for i := 0; i < 10; i++ {
+    sum += i
+}
+```
+
+Go can also loop forever by using the following syntax:
+```go
+for {
+}
+```
+
+#### While(in Go is a for)
+```go
+sum := 1
+for sum < 1000 {
+    sum += sum
+}
+```
+
+#### Conditional(if/else)
+```go
+var x int
+if x < 10; x > 0 {
+    return x
+} else {
+    fmt.Printf("x does not satisfy condition :(")
+}
+```
+
+#### Switch
+```go
+switch time.Saturday {
+case today + 0:
+    fmt.Println("Today.")
+case today + 1:
+    fmt.Println("Tomorrow.")
+case today + 2:
+    fmt.Println("In two days.")
+default:
+    fmt.Println("Too far away.")
+}
+```
+
+#### Defer
+Defer statements is used to ensure that a function is executed when the current function is about to return. This is useful for freeing up resources such as files or network connections, or for ensuring that certain actions are performed regardless of how the current function ends (whether by an error or by success).
+```go
+func main() {
+	defer fmt.Println("world")
+
+	fmt.Println("hello")
+}
+```
