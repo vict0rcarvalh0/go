@@ -226,5 +226,69 @@ primes := [6]int{2, 3, 5, 7, 11, 13}
 ```
 
 #### Slices
+- A slice is a dynamically-sized, flexible view into the elements of an array.
+- Slice does not store any data, it just describes a section of an underlying array.
+- Changing the elements of a slice modifies the corresponding elements of its underlying array.
+- The length and capacity of a slice s can be obtained using the expressions `len(s)` and `cap(s)`.
+- The zero value of a slice is `nil` -> Capacity and Length of 0.
+
+```go
+[]T // -> Slice of elements with type T
+primes := [6]int{2, 3, 5, 7, 11, 13} // -> length 6, type int, values
+var s []int = primes[1:4] // -> output: 3, 5, 7
+
+// Slice the slice to give it zero length.
+s = s[:0]
+printSlice(s)
+
+// Extend its length.
+s = s[:4]
+printSlice(s)
+
+// Drop its first two values.
+s = s[2:]
+printSlice(s)
+
+// Creating Slice with make(built-in function that allocates a zeroed array and returns a slice that refers to that array)
+a := make([]int, 5)  // len(a)=5
+
+b := make([]int, 0, 5) // len(b)=0, cap(b)=5
+
+b = b[:cap(b)] // len(b)=5, cap(b)=5
+b = b[1:]      // len(b)=4, cap(b)=4
+
+// Slice of Slices
+board := [][]string{
+    []string{"_", "_", "_"},
+    []string{"_", "_", "_"},
+    []string{"_", "_", "_"},
+}
+
+// Append works on nil slices.
+s = append(s, 0)
+printSlice(s)
+
+// The slice grows as needed.
+s = append(s, 1)
+printSlice(s)
+
+// We can add more than one element at a time.
+s = append(s, 2, 3, 4)
+printSlice(s)
+
+// The range form of the for loop iterates over a slice or map.
+func main() {
+	for i, v := range pow {
+		fmt.Printf("2**%d = %d\n", i, v)
+	}
+}
+
+// You can skip the index or value by assigning to _.
+for i, _ := range pow
+for _, value := range pow
+
+// If you only want the index, you can omit the second variable.
+for i := range pow
+```
 
 #### Maps
