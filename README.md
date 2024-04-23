@@ -91,6 +91,7 @@ u := uint(f)
 ```
 
 #### Functions
+In Go, functions are values too, thay can be passed around just like other values.
 ```go
 func MyFunction(var1 type, var2 type) return_type {
     return x + y
@@ -292,3 +293,45 @@ for i := range pow
 ```
 
 #### Maps
+- Maps is useful to map keys to values
+- Zero value of a map is nil(has no keys and cannot be added)
+- The make function returns a map of the given type, initialized and ready for use
+
+```go
+    var m map[type]StructName 
+    m = make(map[type]StructName)
+    m["My Key 1"] = StructName{
+		40.68433, -74.39967,
+	}
+
+    // Map literals 
+    var m = map[type]StructName{
+        "My Key 2": StructName{
+            40.68433, -74.39967,
+        },
+        "My Key 3": StructName {
+            40.68433, -74.39967,
+        },
+    }
+
+    // Map literals continued -> Top-level type is just a type name
+    var m = map[type]StructName{
+	"My Key 2": {40.68433, -74.39967},
+	"My Key 3": {37.42202, -122.08408},
+    }
+
+    // Inserting or updating an element in map m
+    m := make(map[string]int)
+    m[key] = elem
+
+    // Retrieve an element
+    elem = m[key]
+
+    // Delete an element
+    delete(m, key)
+
+    // Test that a key is present with a two-value assignment:
+    elem, ok = m[key] // if key is in m ok is true, if not ok is false
+```
+
+#### Function closures
