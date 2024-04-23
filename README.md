@@ -351,6 +351,10 @@ func (v StructName) MethodName() return_type {
 ```
 
 #### Interfaces
+- Interfaces are implemented implicitly by implementing its methods. There is no explicit declaration of intent, no "implements" keyword.
+- Under the hood, interface values can be thought of as a tuple of a value and a concrete type.
+    - Calling a method on an interface value executes the method of the same name on its underlying type.
+
 ```go
 type InterfaceName interface {
 	MethodName() return_type
@@ -370,5 +374,48 @@ func (f MyFloat) MethodName() float64 {
 		return float64(-f)
 	}
 	return float64(f)
+}
+
+// Empty Interface
+var i interface{}
+
+```
+
+#### Special Interfaces
+**Stringers**
+- A Stringer is a type that can describe itself as a string. The fmt package (and many others) look for this interface to print values.
+```go
+type Stringer interface {
+    String() string
+}
+```
+
+**Errors**
+- The error type is a built-in interface similar to fmt.Stringer.
+- Functions often return an error value, and calling code should handle errors by testing whether the error equals nil.
+- A nil error denotes success; a non-nil error denotes failure.
+```go
+type error interface {
+    Error() string
+}
+```
+
+**Readers**
+- The io package specifies the io.Reader interface, which represents the read end of a stream of data.
+- The io.Reader interface has a Read method
+    - Read populates the given byte slice with data and returns the number of bytes populated and an error value. It returns an io.EOF error when the stream ends.
+```go
+func (T) Read(b []byte) (n int, err error)
+```
+
+**Images**
+- Package image defines the Image interface
+```go
+package image
+
+type Image interface {
+    ColorModel() color.Model
+    Bounds() Rectangle
+    At(x, y int) color.Color
 }
 ```
