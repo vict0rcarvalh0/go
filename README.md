@@ -335,3 +335,40 @@ for i := range pow
 ```
 
 #### Function closures
+
+#### Methods
+- Go doesn't have classes! But methods can be defined on types
+- Method is a function with a special receiver(appears in its own arg list between func word and method name) argument
+- The receiver can be a pointer. There are two reasons to use a pointer receiver:
+    - The first is so that the method can modify the value that its receiver points to.
+    - The second is to avoid copying the value on each method call. This can be more efficient if the receiver is a large struct, for example.
+- In general, all methods on a given type should have either value or pointer receivers, but not a mixture of both.
+
+```go
+func (v StructName) MethodName() return_type {
+    return "blablabla"
+}
+```
+
+#### Interfaces
+```go
+type InterfaceName interface {
+	MethodName() return_type
+}
+
+var a InterfaceName
+f := MyFloat(-math.Sqrt2)
+s := StructName{1, 2}
+
+a = f  // a MyFloat implements InterfaceName
+a = &v // a *StructName implements InterfaceName
+
+type MyFloat float64
+
+func (f MyFloat) MethodName() float64 {
+	if f < 0 {
+		return float64(-f)
+	}
+	return float64(f)
+}
+```
