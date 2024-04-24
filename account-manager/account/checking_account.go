@@ -1,4 +1,4 @@
-package account
+package checking_account
 
 import (
 	"errors"

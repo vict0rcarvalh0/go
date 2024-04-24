@@ -1,7 +1,7 @@
 package bank
 
 import (
-	account "account-manager/account"
+	checking_account "account-manager/account"
 	bank_account "account-manager/interfaces"
 	"errors"
 	"fmt"
@@ -19,7 +19,7 @@ func NewBank() *Bank {
 }
 
 func (b *Bank) CreateAccount(accountNumber int, owner string) {
-	newAccount := &account.CheckingAccount{
+	newAccount := &checking_account.CheckingAccount{
 		AccountNumber: accountNumber,
 		Owner:         owner,
 		Balance:       0.0,
@@ -36,7 +36,7 @@ func (b *Bank) Transfer(amount float64, from int, to int) error {
 	accountTo, existTo := b.accounts[to]
 
 	if !existFrom || !existTo {
-		return errors.New("One of the accounts does not exist!")
+		return errors.New("one of the accounts does not exist")
 	}
 
 	if err := accountFrom.Withdraw(amount); err != nil {
@@ -49,6 +49,6 @@ func (b *Bank) Transfer(amount float64, from int, to int) error {
 func (b *Bank) GetAccounts() {
 	for number, account := range b.accounts {
 		balance := account.CheckBalance()
-		fmt.Printf("Account %d - Owner: %s, Balance: %.2f\n", number, account.(account.CheckingAccount).Owner, balance)
+		fmt.Printf("Account %d - Owner: %s, Balance: %.2f\n", number, account.(*checking_account.CheckingAccount).Owner, balance)
 	}
 }
