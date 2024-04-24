@@ -1,4 +1,4 @@
-package bank_account
+package interfaces
 
 type BankAccount interface {
 	Deposit(amount float64) error
