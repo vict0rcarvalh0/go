@@ -43,11 +43,7 @@ func (b *Bank) Transfer(amount float64, from int, to int) error {
 		return err
 	}
 
-	err = accountTo.Deposit(amount)
-	if err != nil {
-		accountFrom.Deposit(amount)
-		return err
-	}
+	accountTo.Deposit(amount)
 
 	return nil
 }
