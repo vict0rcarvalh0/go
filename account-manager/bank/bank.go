@@ -42,7 +42,13 @@ func (b *Bank) Transfer(amount float64, from int, to int) error {
 	if err := accountFrom.Withdraw(amount); err != nil {
 		return err
 	}
-	accountTo.Withdraw(amount)
+
+	err = accountTo.Deposit(amount)
+	if err != nil {
+		accountFrom.Deposit(amount)
+		return err
+	}
+
 	return nil
 }
 
@@ -51,4 +57,20 @@ func (b *Bank) GetAccounts() {
 		balance := account.CheckBalance()
 		fmt.Printf("Account %d - Owner: %s, Balance: %.2f\n", number, account.(*checking_account.CheckingAccount).Owner, balance)
 	}
+}
+
+func (b *Bank) Deposit(accountNumber int, amount float64) error {
+	account, exists := b.accounts[accountNumber]
+	if !exists {
+		return fmt.Errorf("conta com número %d não existe", accountNumber)
+	}
+	return account.Deposit(amount)
+}
+
+func (b *Bank) Withdraw(accountNumber int, amount float64) error {
+	account, exists := b.accounts[accountNumber]
+	if !exists {
+		return fmt.Errorf("conta com número %d não existe", accountNumber)
+	}
+	return account.Withdraw(amount)
 }
