@@ -1,10 +1,9 @@
 package main
 
 import (
+	"account-manager-api/internal/routes"
 	"log"
 	"net/http"
-
-	"account-manager-api/internal/routes"
 )
 
 func main() {
