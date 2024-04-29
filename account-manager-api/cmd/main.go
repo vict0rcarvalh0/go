@@ -4,11 +4,23 @@ import (
 	"account-manager-api/internal/routes"
 	"log"
 	"net/http"
+	"os"
+	"github.com/joho/godotenv"
 )
 
 func main() {
-	r := routes.SetupRoutes()
+    godotenv.Load()
 
-	log.Println("Servidor rodando na porta 8080...")
-	log.Fatal(http.ListenAndServe(":8080", r))
+    r := routes.SetupRoutes()
+
+    port := os.Getenv("PORT")
+    if port == "" {
+        port = "8080"
+    }
+
+    address := fmt.Sprintf(":%s", port)
+
+    log.Printf("Servidor rodando na porta %v", port)
+
+    log.Fatal(http.ListenAndServe(address, r))
 }
