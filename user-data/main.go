@@ -2,48 +2,32 @@ package main
 
 import (
 	"fmt"
-	"time"
+	"example.com/structs/user"
 )
 
-type user struct {
-	firstName string
-	lastName string
-	birthDate string
-	age int
-	createdAt time.Time
-}
-
-// Method
-func (u user) outputUserData() {
-	fmt.Println("First Name:", u.firstName)
-	fmt.Println("Last Name:", u.lastName)
-	fmt.Println("Birth Date:", u.birthDate)
-	fmt.Println("Age:", u.age)
-	fmt.Println("Created At:", u.createdAt)
-}
-
-// Mutation Method
-func (u *user) clearUserName() {
-	u.firstName = ""
-	u.lastName = ""
-}
 
 func main() {
 	userFirstName := getUserData("Please enter your first name: ")
 	userLastName := getUserData("Please enter your last name: ")
 	userBirthdate := getUserData("Please enter your birthdate (MM/DD/YYYY): ")
 
-	var appUser user
+	var appUser *user.User
 
-	appUser = user{
-		firstName: userFirstName,
-		lastName: userLastName,
-		birthDate: userBirthdate,
-		createdAt: time.Now(),
+	appUser, err := user.New(userFirstName, userLastName, userBirthdate)
+	
+	if err != nil {
+		fmt.Println(err)
+		return
 	}
 
-	appUser.outputUserData()
-	appUser.clearUserName()
+	admin := user.NewAdmin("test@example:com", "password")
+
+	admin.OutputUserData()
+	admin.ClearUserName()
+	admin.OutputUserData()
+
+	appUser.OutputUserData()
+	appUser.ClearUserName()
 }
 
 func getUserData(promptText string) string {
