@@ -6,10 +6,33 @@ import (
 	"os"
 	"strings"
 	"structs-practice/note"
+	"structs-practice/todo"
 )
+
+type saver interface {
+	Save() error
+}
+
+type displayer interface {
+	Display()
+}
+
+// embedding interfaces
+type outputtable interface {
+	saver
+	displayer
+}
 
 func main() {
 	title, content := getNoteData()
+	todoText := getUserInput("Todo content:")
+
+	todo, err := todo.New(todoText)
+
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
 
 	userNote, err := note.New(title, content)
 
@@ -18,15 +41,18 @@ func main() {
 		return
 	}
 
-	userNote.Display()
-	err = userNote.Save()
+	todo.Display()
+	err = saveData(todo) // can pass todo as param because it implements the Save method
 
 	if err != nil {
-		fmt.Println(err)
 		return
 	}
 
-	fmt.Println("Note saved successfully")
+	err = outputData(userNote)
+
+	if err != nil {
+		return
+	}
 }
 
 func getUserInput(prompt string) string {
@@ -51,4 +77,21 @@ func getNoteData() (string, string) {
 	content := getUserInput("Note content:")
 
 	return title, content
+}
+
+func saveData(data saver) error {
+	err := data.Save()
+
+	if err != nil {
+		fmt.Println("Saving data failed")
+		return err
+	}
+
+	fmt.Println("Data saved successfully")
+	return nil
+}
+
+func outputData(data outputtable) error {
+	data.Display()
+	return saveData(data)
 }
