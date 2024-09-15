@@ -1,21 +1,34 @@
 package main
 
 import (
+	"errors"
 	"fmt"
 	"time"
 )
 
-func greet(phrase string, doneChannel chan bool) {
-	fmt.Println("Hello!", phrase)
+func greet(phrase string, doneChannel chan bool, errorChan chan error) {
+	_, err := fmt.Println("Hello!", phrase)
 	doneChannel <- true
+
+	if err != nil {
+		errorChan <- err
+		return
+	}
 }
 
-func slowGreet(phrase string, doneChannel chan bool) {
+func slowGreet(phrase string, doneChannel chan bool, errorChan chan error) {
 	time.Sleep(3 * time.Second)
 
-	fmt.Println("Hello!", phrase)
+	_, err := fmt.Println("Hello!", phrase)
+
+	errorChan <- errors.New("error found running Goroutine") // Forcing error
+
+	if err != nil {
+		errorChan <- err
+		return
+	}
+
 	doneChannel <- true
-	close(doneChannel)
 }
 
 // Concurrency
@@ -30,25 +43,23 @@ func slowGreet(phrase string, doneChannel chan bool) {
 func main() {
 	// Channel to know if the goroutine has finished
 	done := make(chan bool)
-	// dones := make([]chan bool, 4)
+	errorChan := make(chan error)
 
-	// dones[0] = make(chan bool)
-	go greet("Nice to meet you!", done) // done would be dones[0]
+	go greet("Nice to meet you!", done, errorChan)
+	go greet("How are you?", done, errorChan)
+	go slowGreet("How ... are ... you?", done, errorChan)
+	go greet("I hope you're liking to learn go!!", done, errorChan)
 
-	// dones[1] = make(chan bool)
-	go greet("How are you?", done) // done would be dones[1]
-
-	// dones[2] = make(chan bool)
-	go slowGreet("How ... are ... you?", done) // done would be dones[2]
-
-	// dones[3] = make(chan bool)
-	go greet("I hope you're liking to learn go!!", done) // done would be dones[3]
- 
 	// Waiting for the channel to receive data(Go will wait until the channel receives data)
-	for range done {
+	for i := 0; i < 4; i++ {
+		select {
+		case <-done:
+			fmt.Println("Goroutine finished successfully")
+		case err := <-errorChan:
+			fmt.Println("Error found running Goroutine:", err)
+		}
 	}
 
-	// for _, done := range dones {
-	// 	<-done
-	// }
+	close(done)
+	close(errorChan)
 }
