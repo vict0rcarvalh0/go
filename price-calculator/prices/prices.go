@@ -31,7 +31,7 @@ func (job *TaxIncludedPriceJob) LoadData() error {
 }
 
 func (job TaxIncludedPriceJob) Process() error {
-	err := job.LoadData()[]
+	err := job.LoadData()
 
 	if err != nil {
 		return err
@@ -46,7 +46,7 @@ func (job TaxIncludedPriceJob) Process() error {
 
 	job.TaxIncludedPrices = result
 
-	return job.IOManager.WriteJson(job)	 
+	return job.IOManager.WriteJson(job)
 }
 
 func NewTaxIncludedPriceJob(iom iomanager.IOManager, taxRate float64) *TaxIncludedPriceJob {
