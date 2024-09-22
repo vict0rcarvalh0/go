@@ -1,0 +1,164 @@
+{
+    "clientName": "Thunder Client",
+    "collectionName": "booking event api",
+    "collectionId": "fef7cef1-138e-43b0-bdc6-64c9c17eba82",
+    "dateExported": "2024-09-22T16:47:03.892Z",
+    "version": "1.2",
+    "folders": [],
+    "requests": [
+        {
+            "_id": "720f810e-1904-45bd-b8d0-41bf6de99505",
+            "colId": "fef7cef1-138e-43b0-bdc6-64c9c17eba82",
+            "containerId": "",
+            "name": "signup",
+            "url": "http://localhost:8080/signup",
+            "method": "POST",
+            "sortNum": 10000,
+            "created": "2024-09-22T16:40:23.492Z",
+            "modified": "2024-09-22T16:40:23.492Z",
+            "headers": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n    \"email\": \"test@gmail.com\",\n    \"password\": \"test\"\n}",
+                "form": []
+            }
+        },
+        {
+            "_id": "7efc6e54-68d8-471f-b4ab-5c5c365f416a",
+            "colId": "fef7cef1-138e-43b0-bdc6-64c9c17eba82",
+            "containerId": "",
+            "name": "login",
+            "url": "http://localhost:8080/login",
+            "method": "GET",
+            "sortNum": 20000,
+            "created": "2024-09-22T16:40:40.217Z",
+            "modified": "2024-09-22T16:41:03.321Z",
+            "headers": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n    \"email\": \"test@gmail.com\",\n    \"password\": \"test\"\n}",
+                "form": []
+            }
+        },
+        {
+            "_id": "d19f3081-f2e5-4add-af20-21c7b43b7c0b",
+            "colId": "fef7cef1-138e-43b0-bdc6-64c9c17eba82",
+            "containerId": "",
+            "name": "create event",
+            "url": "http://localhost:8080/events",
+            "method": "POST",
+            "sortNum": 30000,
+            "created": "2024-09-22T16:41:27.486Z",
+            "modified": "2024-09-22T16:42:21.518Z",
+            "headers": [
+                {
+                    "name": "Authorization",
+                    "value": "my bearer token from login"
+                }
+            ],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"name\": \"test event\",\n  \"description\": \"a test event\",\n  \"location\": \"a test location\",\n  \"dateTime\": \"2025-01-01T15:30:00.000Z\"\n}",
+                "form": []
+            }
+        },
+        {
+            "_id": "01364909-2232-4353-abbb-1a5d239c3080",
+            "colId": "fef7cef1-138e-43b0-bdc6-64c9c17eba82",
+            "containerId": "",
+            "name": "update event",
+            "url": "http://localhost:8080/events/1",
+            "method": "PUT",
+            "sortNum": 40000,
+            "created": "2024-09-22T16:42:59.691Z",
+            "modified": "2024-09-22T16:43:59.073Z",
+            "headers": [
+                {
+                    "name": "Authorization",
+                    "value": "my bearer token from login"
+                }
+            ],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"name\": \"test event\",\n  \"description\": \"a test event\",\n  \"location\": \"a test location\",\n  \"dateTime\": \"2025-01-01T15:30:00.000Z\"\n}",
+                "form": []
+            }
+        },
+        {
+            "_id": "371c8ea0-c19a-4c39-8249-1d737ca11351",
+            "colId": "fef7cef1-138e-43b0-bdc6-64c9c17eba82",
+            "containerId": "",
+            "name": "delete event",
+            "url": "http://localhost:8080/events/1",
+            "method": "DELETE",
+            "sortNum": 50000,
+            "created": "2024-09-22T16:44:04.868Z",
+            "modified": "2024-09-22T16:44:36.934Z",
+            "headers": [
+                {
+                    "name": "Authorization",
+                    "value": "my bearer token from login"
+                }
+            ]
+        },
+        {
+            "_id": "4318ae81-c38f-43c6-ba3d-8d065cfb5c11",
+            "colId": "fef7cef1-138e-43b0-bdc6-64c9c17eba82",
+            "containerId": "",
+            "name": "get all events",
+            "url": "http://localhost:8080/events",
+            "method": "GET",
+            "sortNum": 60000,
+            "created": "2024-09-22T16:44:57.520Z",
+            "modified": "2024-09-22T16:45:03.756Z",
+            "headers": []
+        },
+        {
+            "_id": "67ba3d86-816d-4de3-a478-c06df0ed3d9e",
+            "colId": "fef7cef1-138e-43b0-bdc6-64c9c17eba82",
+            "containerId": "",
+            "name": "get event by id",
+            "url": "http://localhost:8080/events/1",
+            "method": "GET",
+            "sortNum": 70000,
+            "created": "2024-09-22T16:45:13.012Z",
+            "modified": "2024-09-22T16:45:16.147Z",
+            "headers": []
+        },
+        {
+            "_id": "f4dce955-aa62-4bda-9e5c-aed78b8671ba",
+            "colId": "fef7cef1-138e-43b0-bdc6-64c9c17eba82",
+            "containerId": "",
+            "name": "register for event",
+            "url": "http://localhost:8080/events/1/register",
+            "method": "POST",
+            "sortNum": 80000,
+            "created": "2024-09-22T16:45:31.209Z",
+            "modified": "2024-09-22T16:46:58.645Z",
+            "headers": [
+                {
+                    "name": "Authorization",
+                    "value": "my bearer token from login"
+                }
+            ]
+        },
+        {
+            "_id": "6d3d30f0-c8f0-4d8e-a5bc-c0544fadefec",
+            "colId": "fef7cef1-138e-43b0-bdc6-64c9c17eba82",
+            "containerId": "",
+            "name": "cancel registration for event",
+            "url": "http://localhost:8080/events/1/register",
+            "method": "DELETE",
+            "sortNum": 90000,
+            "created": "2024-09-22T16:46:26.528Z",
+            "modified": "2024-09-22T16:46:52.148Z",
+            "headers": [
+                {
+                    "name": "Authorization",
+                    "value": "my bearer token from login"
+                }
+            ]
+        }
+    ],
+    "ref": "n-wE2Xw5ASVtQBdj6G2g3o0mUfCM3XPEw0aAPLvFg_YFy9MBiOXTMkgUW-t8KyxleqrE74LH4uUYBY6dY9WVBg"
+}
