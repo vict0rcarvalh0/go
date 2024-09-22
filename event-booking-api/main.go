@@ -1,21 +1,16 @@
 package main
 
 import (
-	"event-booking-api/models"
-	"net/http"
+	"event-booking-api/db"
+	"event-booking-api/router"
 
 	"github.com/gin-gonic/gin"
 )
 
 func main() {
-	server := gin.Default() // initialize the default Gin router(with the Logger and Recovery middleware attached)
-
-	server.GET("/events", getEvents)
+	db.InitDB()                // initialize the database
+	server := gin.Default()    // initialize the default gin router(with the logger and recovery middleware attached)]
+	router.SetupRoutes(server) // setup the routes
 
 	server.Run(":8080") // start the server
-}
-
-func getEvents(context *gin.Context) { // context is the object that contains all the information about the current request
-	events := models.GetAllEvents()
-	context.JSON(http.StatusOK, events)
 }
